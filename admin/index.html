@@ -1,0 +1,45 @@
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<script src="../_js/jquery-3.4.1.min.js"></script>
+	<style>
+	form {
+		display: table;
+	}
+
+	form > div {
+		display: table-row;
+	}
+
+	form > div > * {
+		display: table-cell;
+	}
+	</style>
+</head>
+<body>
+	<form method="post">
+		<div>
+			<label for="usuario">Usuário:</label>
+			<input name="usuario" />
+		</div>
+		<div>
+			<label for="senha">Senha:</label>
+			<input name="senha" type="password" />
+		</div>
+		<input type="submit" />
+	</form>
+	<script>
+	$('form').submit(function () {
+		$.post('login.php', $(this).serialize(), function (resposta) {
+			if (resposta.ok) {
+				window.location = 'menu.php';
+			}
+			else {
+				alert('Usuário ou senha inválidos!');
+			}
+		}, 'json');
+		return false;
+	});
+	</script>
+</body>
+</html>
