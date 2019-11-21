@@ -1,24 +1,15 @@
 <?php
 session_start();
 
-function checaUsuario($nomeUsuario, $senha) {
-	if ($senha == '123') {
-		$usuario = [
-			'id' => 1,
-			'usuario' => $nomeUsuario,
-			'nome' => ucfirst($nomeUsuario)
-		];
-	}
-	else {
-		$usuario = false;
-	}
-	return $usuario;
-}
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/eventos/InscricoesDAO.php');
+
+$dao = new InscricoesDAO();
 
 $nomeUsuario = $_POST['usuario'];
 $senha = $_POST['senha'];
 
-$usuario = checaUsuario($nomeUsuario, $senha);
+$usuario = $dao->checaUsuario($nomeUsuario, $senha);
 if ($usuario) {
 	$_SESSION['usuario'] = $usuario;
 	$resposta = true;

@@ -41,6 +41,8 @@
 		</tbody>
 	</table>
 	<script>
+	var url = 'http://localhost/eventos/admin/controlador/Eventos.php';
+	
 	function valida(form) {
 		var ok = true;
 		
@@ -52,7 +54,7 @@
 	function posta(form) {
 		$.ajax({
 			type: 'POST',
-			url: 'eventos/inserir.php',
+			url: url,
 			data: $(form).serialize(),
 			dataType: 'json',
 			success: function (resposta) {	
@@ -70,7 +72,7 @@
 	function lista() {
 		$.ajax({
 			type: 'GET',
-			url: 'eventos/listar.php',
+			url: url + '?acao=listar',
 			dataType: 'json',
 			success: function (eventos) {
 				var tbody = $('#lista');
@@ -88,7 +90,7 @@
 	}
 	
 	function edita(id) {
-		$.get('eventos/ver.php?id=' + id, function (evento) {
+		$.get(url + '?acao=ver&id=' + id, function (evento) {
 			$('#id').val(evento.id);
 			$('#nome').val(evento.nome);
 			$('#data').val(evento.data);
@@ -101,7 +103,7 @@
 	function apaga(id) {
 		var ok = confirm('Deseja apagar #' + id + '?');
 		if (ok) {
-			$.get('eventos/apagar.php?id=' + id, function (resposta) {
+			$.get(url + '?acao=apagar&id=' + id, function (resposta) {
 				if (resposta.ok) {
 					alert('Apagado com sucesso!');
 					lista();

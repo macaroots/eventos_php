@@ -1,6 +1,6 @@
 <?php
-include('eventos/modelo.php');
-include('inscricoes/modelo.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/EventosDAO.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/InscricoesDAO.php');
 
 $daoEventos = new EventosDAO();
 $daoInscricoes = new InscricoesDAO();
@@ -81,18 +81,19 @@ foreach ($eventos as $evento) {
 		</tbody>
 	</table>
 	<script>
+	var url = 'http://localhost/eventos/admin/controlador/Submissoes.php';
 	function valida(form) {
 		var ok = true;
 		
 		if (ok) {
-			postaSubmissao(form);
+			posta(form);
 		}
 	}
 	
-	function postaSubmissao(form) {
+	function posta(form) {
 		$.ajax({
 			type: 'POST',
-			url: 'submissoes/inserir.php',
+			url: url,
 			data: $(form).serialize(),
 			dataType: 'json',
 			success: function (resposta) {	
@@ -110,7 +111,7 @@ foreach ($eventos as $evento) {
 	function lista() {
 		$.ajax({
 			type: 'GET',
-			url: 'submissoes/listar.php',
+			url: url + '?acao=listar',
 			dataType: 'json',
 			success: function (submissoes) {
 				var tbody = $('#lista');
@@ -129,7 +130,7 @@ foreach ($eventos as $evento) {
 	}
 	
 	function edita(id) {
-		$.get('submissoes/ver.php?id=' + id, function (submissao) {
+		$.get(url + '?acao=ver&id=' + id, function (submissao) {
 			$('#id').val(submissao.id);
 			$('#titulo').val(submissao.titulo);
 			$('#resumo').val(submissao.resumo);
@@ -145,7 +146,7 @@ foreach ($eventos as $evento) {
 	function apaga(id) {
 		var ok = confirm('Deseja apagar #' + id + '?');
 		if (ok) {
-			$.get('submissoes/apagar.php?id=' + id, function (resposta) {
+			$.get(url + '?acao=apagar&id=' + id, function (resposta) {
 				if (resposta.ok) {
 					alert('Apagado com sucesso!');
 					lista();

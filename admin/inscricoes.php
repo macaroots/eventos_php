@@ -1,5 +1,5 @@
 <?php
-include("eventos/modelo.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/EventosDAO.php');
 $dao = new EventosDAO();
 $eventos = $dao->listar();
 ?>
@@ -7,6 +7,7 @@ $eventos = $dao->listar();
 <head>
 	<meta charset="utf-8"/>
 	<script src="../_js/jquery-3.4.1.min.js"></script>
+	<script src="../_js/crud_inscricoes.js"></script>
 </head>
 <body>
 	<?php include('menu.php'); ?>
@@ -17,6 +18,16 @@ $eventos = $dao->listar();
 		<div>
 			<label for="nome">Nome</label>
 			<input type="text" name="nome" id="nome" required="true"/>
+		</div>
+		
+		<div>
+			<label for="usuario">Usuário</label>
+			<input type="text" name="usuario" id="usuario" required="true"/>
+		</div>
+		
+		<div>
+			<label for="senha">Senha</label>
+			<input type="password" name="senha" id="senha" required="true"/>
 		</div>
 		
 		<div>
@@ -54,83 +65,6 @@ foreach ($eventos as $evento) {
 		</tbody>
 	</table>
 	<script>
-	function valida(form) {
-		var ok = true;
-		
-		if (ok) {
-			posta(form);
-		}
-	}
-	
-	function posta(form) {
-		$.ajax({
-			type: 'POST',
-			url: 'inscricoes/controlador.php?acao=inserir',
-			data: $(form).serialize(),
-			dataType: 'json',
-			success: function (resposta) {	
-				if (resposta.ok) {
-					alert(resposta.mensagem);
-					lista();
-				}
-				else {
-					alert(resposta.mensagem);
-				}
-			}
-		});
-	}
-
-	function lista() {
-		$.ajax({
-			type: 'GET',
-			url: 'inscricoes/controlador.php?acao=listar',
-			dataType: 'json',
-			success: function (inscricoes) {
-				var tbody = $('#lista');
-				tbody.html('');
-				for (var i in inscricoes) {
-					var inscricao = inscricoes[i]
-					var linha = $('<tr>').appendTo(tbody);
-					linha.append('<td>' + inscricao.id + '</td>');
-					linha.append('<td>' + inscricao.nome + '</td>');
-					linha.append('<td>' + inscricao.email + '</td>');
-					linha.append('<td>' + inscricao.evento + '</td>');
-					linha.append('<td><a href="javascript: edita(' + inscricao.id + ');">editar</a> <a href="javascript: apaga(' + inscricao.id + ');">apagar</a></td>');
-				}
-			}
-		});
-	}
-	
-	function edita(id) {
-		$.get('inscricoes/controlador.php?acao=ver&id=' + id, function (inscricao) {
-			$('#id').val(inscricao.id);
-			$('#nome').val(inscricao.nome);
-			$('#email').val(inscricao.email);
-			$('#evento').val(inscricao.evento);
-			
-			$('#acao').val('editar');
-		}, 'json');
-	}
-	
-	function apaga(id) {
-		var ok = confirm('Deseja apagar #' + id + '?');
-		if (ok) {
-			$.get('inscricoes/controlador.php?acao=apagar&id=' + id, function (resposta) {
-				if (resposta.ok) {
-					alert('Apagado com sucesso!');
-					lista();
-				}
-				else {
-					alert('Erro ao apagar!');
-				}
-			}, 'json');
-		}
-	}
-
-	function novo() {
-		$('#acao').val('inserir');
-		$('#id').val(0);
-	}
 	
 	lista();
 	</script>
