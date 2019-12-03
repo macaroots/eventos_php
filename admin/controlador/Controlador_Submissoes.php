@@ -1,11 +1,11 @@
 <?php
 include('../checa_logado.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/controlador/ControladorAbstrato.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/SubmissoesDAO.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/controlador/Controlador_Abstrato.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Submissoes.php');
 
 class Controlador_Submissoes extends ControladorAbstrato {
 	function __construct() {
-		$this->dao = new SubmissoesDAO();
+		$this->dao = new DAO_Submissoes();
 	}
 	
 	function getDadosForm() {
