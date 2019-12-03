@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/EventosDAO.php');
-$dao = new EventosDAO();
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
+$dao = new DAO_Eventos();
 $eventos = $dao->listar();
 ?>
 <html>
