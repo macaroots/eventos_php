@@ -1,7 +1,7 @@
 <?php
 include_once('../checa_logado.php');
 
-abstract class ControladorAbstrato {
+abstract class Controlador_Abstrato {
 	public $dao;
 	
 	function apagar() {
