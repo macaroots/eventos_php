@@ -2,9 +2,9 @@
 session_start();
 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/eventos/InscricoesDAO.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/eventos/DAO_Inscricoes.php');
 
-$dao = new InscricoesDAO();
+$dao = new DAO_Inscricoes();
 
 $nomeUsuario = $_POST['usuario'];
 $senha = $_POST['senha'];
