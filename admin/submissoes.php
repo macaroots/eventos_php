@@ -1,9 +1,9 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/EventosDAO.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/InscricoesDAO.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Inscricoes.php');
 
-$daoEventos = new EventosDAO();
-$daoInscricoes = new InscricoesDAO();
+$daoEventos = new DAO_Eventos();
+$daoInscricoes = new DAO_Inscricoes();
 $eventos = $daoEventos->listar();
 $inscricoes = $daoInscricoes->listar();
 ?>
@@ -81,7 +81,7 @@ foreach ($eventos as $evento) {
 		</tbody>
 	</table>
 	<script>
-	var url = 'http://localhost/eventos/admin/controlador/Submissoes.php';
+	var url = 'http://localhost/eventos/admin/controlador/Controlador_Submissoes.php';
 	function valida(form) {
 		var ok = true;
 		
