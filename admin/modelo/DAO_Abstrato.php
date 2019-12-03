@@ -3,7 +3,7 @@ if(!isset($_SESSION)) {
 	session_start();
 }
 
-abstract class DAOAbstrato {
+abstract class DAO_Abstrato {
 	public $tabela = 'eventos';
 
 	abstract function valida($bean);
