@@ -1,0 +1,25 @@
+<?php
+include('../checa_logado.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/controlador/Controlador_Abstrato.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Usuarios.php');
+class Controlador_Usuarios extends Controlador_Abstrato {
+	function __construct() {
+		$this->dao = new DAO_Usuarios();
+	}
+	
+	function getDadosForm() {
+		$bean = [
+			'nome' => $_POST['nome'],
+			'login' => $_POST['login'],
+			'senha' => $_POST['senha']
+		];
+    if (isset($_POST['id'])) {
+			$bean['id'] = $_POST['id'];
+		return $bean;
+	}
+}
+if (isset($_REQUEST['acao'])) {
+	$controlador = new Controlador_Usuarios();
+	$acao = $_REQUEST['acao'];
+	echo json_encode($controlador->$acao());
+}
