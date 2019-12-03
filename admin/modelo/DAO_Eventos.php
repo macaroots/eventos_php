@@ -2,9 +2,9 @@
 if(!isset($_SESSION)) {
 	session_start();
 }
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAOAbstrato.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Abstrato.php');
 
-class EventosDAO extends DAOAbstrato {
+class DAO_Eventos extends DAO_Abstrato {
 	public $tabela = 'eventos';
 
 	function valida($evento) {
