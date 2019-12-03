@@ -1,4 +1,4 @@
-var url = 'http://localhost/eventos/admin/controlador/Inscricoes.php';
+var url = 'http://localhost/eventos/admin/controlador/Controlador_Inscricoes.php';
 
 function valida(form) {
 	var ok = true;
