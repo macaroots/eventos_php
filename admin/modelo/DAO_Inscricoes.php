@@ -1,7 +1,7 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/EventosDAO.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
 
-class InscricoesDAO extends EventosDAO {
+class DAO_Inscricoes extends DAO_Eventos {
 	public $tabela = 'inscricoes';
 	
 	function checaUsuario($nomeUsuario, $senha) {
