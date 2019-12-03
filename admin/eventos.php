@@ -41,7 +41,7 @@
 		</tbody>
 	</table>
 	<script>
-	var url = 'http://localhost/eventos/admin/controlador/Eventos.php';
+	var url = 'http://localhost/eventos/admin/controlador/Controlador_Eventos.php';
 	
 	function valida(form) {
 		var ok = true;
