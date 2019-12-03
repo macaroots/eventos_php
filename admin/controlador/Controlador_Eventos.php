@@ -1,11 +1,11 @@
 <?php
 include('../checa_logado.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/controlador/ControladorAbstrato.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/EventosDAO.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/controlador/Controlador_Abstrato.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
 
-class Controlador_Eventos extends ControladorAbstrato {
+class Controlador_Eventos extends Controlador_Abstrato {
 	function __construct() {
-		$this->dao = new EventosDAO();
+		$this->dao = new DAO_Eventos();
 	}
 	
 	function getDadosForm() {
