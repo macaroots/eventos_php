@@ -1,8 +1,8 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/EventosDAO.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/SubmissoesDAO.php');
-$daoEventos = new EventosDAO();
-$daoSubmissoes = new SubmissoesDAO();
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Submissoes.php');
+$daoEventos = new DAO_Eventos();
+$daoSubmissoes = new DAO_Submissoes();
 
 $id = $_GET['id'];
 $evento = $daoEventos->ver($id);
