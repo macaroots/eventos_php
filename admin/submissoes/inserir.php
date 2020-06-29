@@ -1,40 +1,22 @@
 <?php
 include('../checa_logado.php');
-
-$acao = $_POST['acao'];
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Submissoes.php');
+$dao = new DAO_Submissoes();
 
 $submissao = [
-	'id' => $_POST['id'],
-	'titulo' => $_POST['titulo'],
-	'resumo' => $_POST['resumo'],
-	'usuarios' => $_POST['usuarios'],
-	'evento' => $_POST['evento'],
-	'tipo' => $_POST['tipo']
+	'id' => $_GET['id'],
+	'titulo' => $_GET['titulo'],
+	'resumo' => $_GET['resumo'],
+	'usuarios' => $_GET['usuarios'],
+	'evento' => $_GET['evento'],
+	'tipo' => $_GET['tipo']
 ];
 
-$ok = true;
-$erros = '';
-
-if ($submissao['titulo'] == '') {
-	$ok = false;
-	$erros .= '\n Título não pode ser em branco';
-}
-
-if ($ok) {
-	if (!isset($_SESSION['submissoes'])) {
-		$_SESSION['submissoes'] = [];
-	}
-	if ($acao == 'inserir') {
-		$_SESSION['submissoes'][] = $submissao;
-		$id = array_key_last($_SESSION['submissoes']);
-		$_SESSION['submissoes'][$id]['id'] = $id;
-	}
-	else {
-		$_SESSION['submissoes'][$submissao['id']] = $submissao;
-	}
+try {
+	$dao->insere($submissao);
 	
 	echo '{"ok": true, "mensagem": "Inserido com sucesso!", "submissao": ' . json_encode($submissao) . '}';
 }
-else {
-	echo '{"ok": false, "mensagem": "Erro ao inserir! ' . $erros . '"}';
+catch (Exception $e) {
+	echo '{"ok": false, "mensagem": "Erro ao inserir! ' . $e->getMessage() . '"}';
 }

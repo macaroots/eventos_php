@@ -16,12 +16,42 @@ abstract class Controlador_Abstrato {
 		return $this->dao->getById($id);
 	}
 	function insere() {
-		$bean = $this->getDadosForm();
-		return $this->dao->insere($bean);
+		try {
+			$bean = $this->getDadosForm();
+			$id = $this->dao->insere($bean);
+		
+			return [
+				"ok" => true,
+				"mensagem" => "Inserido com sucesso!",
+				"bean" => $bean
+			];
+		}
+		catch (Exception $e) {
+			return [
+				"ok" => false,
+				"mensagem" => "Erro ao inserir!",
+				"erros" => $e->getMessage()
+			];
+		}
 	}
 	function edita() {
-		$bean = $this->getDadosForm();
-		return $this->dao->edita($bean);
+		try {
+			$bean = $this->getDadosForm();
+			$this->dao->edita($bean);
+		
+			return [
+				"ok" => true,
+				"mensagem" => "Editado com sucesso!",
+				"bean" => $bean
+			];
+		}
+		catch (Exception $e) {
+			return [
+				"ok" => false,
+				"mensagem" => "Erro ao editar!",
+				"erros" => $e
+			];
+		}
 	}
 	
 	abstract function getDadosForm();

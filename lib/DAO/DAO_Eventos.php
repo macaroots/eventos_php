@@ -7,15 +7,21 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Abstrato.php');
 class DAO_Eventos extends DAO_Abstrato {
 	public $tabela = 'eventos';
 
-	function valida($evento) {
+	function valida($bean) {
 		$ok = true;
 		$erros = [];
 
-		if ($evento['nome'] == '') {
+		if ($bean['nome'] == '') {
 			$ok = false;
-			$erros[] = '\n Nome não pode ser em branco';
+			$erros[] = 'Nome não pode ser em branco';
 		}
-		return ["ok" => $ok, "erros" => $erros];
+		if ($bean['data'] == '') {
+			$ok = false;
+			$erros[] = 'Data não pode ser em branco';
+		}
+		if (!$ok) {
+			throw new Exception(join('\n', $erros));
+		}
 	}
 	
 	

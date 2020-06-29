@@ -3,39 +3,39 @@ if(!isset($_SESSION)) {
 	session_start();
 }
 
-abstract class DAO_Abstrato {
-	public $tabela;
-	
+class DAO_Abstrato {
+	public $tabela = 'tabela';
+
 	function __construct() {		
 		if (!isset($_SESSION[$this->tabela])) {
 			$_SESSION[$this->tabela] = [];
 		}
 	}
 
-	abstract function valida($bean);
-
-	function insere($bean) {
-		$validacao = $this->valida($bean);
-
-		if ($validacao['ok']) {
-			
-			$_SESSION[$this->tabela][] = $bean;
-			$id = array_key_last($_SESSION[$this->tabela]);
-			$_SESSION[$this->tabela][$id]['id'] = $id;
-			
-			return [
-				"ok" => true,
-				"mensagem" => "Inserido com sucesso!",
-				"bean" => $bean
-			];
+	function valida($bean) {
+		// validação básica de exemplo
+		if (empty($bean)) {
+			throw new Exception('Não pode ser vazio!');
 		}
-		else {
-			return [
-				"ok" => false,
-				"mensagem" => "Erro ao inserir!",
-				"erros" => $validacao['erros']
-			];
+	}
+
+	function insere(&$bean) {
+		$this->valida($bean);
+		
+		$id = $this->doInsere($bean);
+		$bean['id'] = $id;
+		return $id;
+	}
+	function doInsere($bean) {
+		if (!isset($_SESSION[$this->tabela])) {
+			$_SESSION[$this->tabela] = [];
 		}
+			
+		$_SESSION[$this->tabela][] = $bean;
+		$id = array_key_last($_SESSION[$this->tabela]);
+		$_SESSION[$this->tabela][$id]['id'] = $id;
+		
+		return $id;
 	}
 
 	function lista() {
@@ -44,24 +44,12 @@ abstract class DAO_Abstrato {
 
 	function edita($bean) {
 		$validacao = $this->valida($bean);
-
-		if ($validacao['ok']) {
-			$_SESSION[$this->tabela][$bean['id']] = $bean;
-			return [
-				"ok" => true,
-				"mensagem" => "Editado com sucesso!",
-				"bean" => $bean
-			];
-		}
-		else {
-			return [
-				"ok" => false,
-				"mensagem" => "Erro ao inserir!",
-				"erros" => $validacao['erros']
-			];
-		}
-				
-
+		
+		$this->doEdita($bean);
+	}
+	
+	function doEdita($bean) {
+		$_SESSION[$this->tabela][$bean['id']] = $bean;		
 	}
 
 	function apaga($id) {

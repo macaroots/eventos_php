@@ -5,7 +5,7 @@ function checaLogado() {
 	}
 
 	if (!isset($_SESSION['usuario'])) {
-		//header('Location: /eventos/admin/index.html');
+		header('Location: /eventos/admin/index.html');
 	}
 }
 
