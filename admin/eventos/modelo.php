@@ -3,7 +3,7 @@ if(!isset($_SESSION)) {
 	session_start();
 }
 
-class EventosDAO {
+class DAO_Eventos {
 	public $tabela = 'eventos';
 	function getDadosForm() {
 		$evento = [
@@ -27,7 +27,7 @@ class EventosDAO {
 		return ["ok" => $ok, "erros" => $erros];
 	}
 
-	function inserir() {
+	function insere() {
 		$evento = $this->getDadosForm();
 		$validacao = $this->valida($evento);
 
@@ -55,11 +55,11 @@ class EventosDAO {
 		}
 	}
 
-	function listar() {
+	function lista() {
 		return $_SESSION[$this->tabela];
 	}
 
-	function editar() {
+	function edita() {
 		
 		$evento = getDadosForm();
 		$validacao = valida($evento);
@@ -83,25 +83,25 @@ class EventosDAO {
 
 	}
 
-	function apagar() {
+	function apaga() {
 		$id = $_GET['id'];
 		unset($_SESSION[$this->tabela][$id]);
 		return ["ok" => true];
 	}
 
-	function ver() {
+	function getById() {
 		$id = $_GET['id'];
 		$evento = $_SESSION[$this->tabela][$id];
 		return $evento;
 	}
 	
 	
-	function listarProximos() {
+	function listaProximos() {
 		return $_SESSION[$this->tabela];
 	}
 	
 	
-	function listarUltimos() {
+	function listaUltimos() {
 		return $_SESSION[$this->tabela];
 	}
 }

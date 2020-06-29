@@ -1,11 +1,11 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Inscricoes.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Eventos.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Inscricoes.php');
 
 $daoEventos = new DAO_Eventos();
 $daoInscricoes = new DAO_Inscricoes();
-$eventos = $daoEventos->listar();
-$inscricoes = $daoInscricoes->listar();
+$eventos = $daoEventos->lista();
+$inscricoes = $daoInscricoes->lista();
 ?>
 <html>
 <head>
@@ -16,7 +16,7 @@ $inscricoes = $daoInscricoes->listar();
 	<?php include('menu.php'); ?>
 	<form id="form" method="post" onSubmit="valida(this); return false;">
 		<input type="reset" value="Novo" onClick="novo();" />
-		<input type="hidden" value="inserir" id="acao" name="acao" />
+		<input type="hidden" value="insere" id="acao" name="acao" />
 		<input type="hidden" value="0" name="id" id="id" />
 		<div>
 			<label for="titulo">Título</label>
@@ -81,7 +81,7 @@ foreach ($eventos as $evento) {
 		</tbody>
 	</table>
 	<script>
-	var url = 'http://localhost/eventos/admin/controlador/Controlador_Submissoes.php';
+	var url = 'http://localhost/eventos/lib/Controlador/Submissoes.php';
 	function valida(form) {
 		var ok = true;
 		
@@ -111,7 +111,7 @@ foreach ($eventos as $evento) {
 	function lista() {
 		$.ajax({
 			type: 'GET',
-			url: url + '?acao=listar',
+			url: url + '?acao=lista',
 			dataType: 'json',
 			success: function (submissoes) {
 				var tbody = $('#lista');
@@ -130,7 +130,7 @@ foreach ($eventos as $evento) {
 	}
 	
 	function edita(id) {
-		$.get(url + '?acao=ver&id=' + id, function (submissao) {
+		$.get(url + '?acao=getById&id=' + id, function (submissao) {
 			$('#id').val(submissao.id);
 			$('#titulo').val(submissao.titulo);
 			$('#resumo').val(submissao.resumo);
@@ -139,14 +139,14 @@ foreach ($eventos as $evento) {
 			$('#' + submissao.tipo).click();
 			//$('#arquivo').val(submissao.arquivo);
 			
-			$('#acao').val('editar');
+			$('#acao').val('edita');
 		}, 'json');
 	}
 	
 	function apaga(id) {
 		var ok = confirm('Deseja apagar #' + id + '?');
 		if (ok) {
-			$.get(url + '?acao=apagar&id=' + id, function (resposta) {
+			$.get(url + '?acao=apaga&id=' + id, function (resposta) {
 				if (resposta.ok) {
 					alert('Apagado com sucesso!');
 					lista();
@@ -159,7 +159,7 @@ foreach ($eventos as $evento) {
 	}
 
 	function novo() {
-		$('#acao').val('inserir');
+		$('#acao').val('insere');
 		$('#id').val(0);
 	}
 	

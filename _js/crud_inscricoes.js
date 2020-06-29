@@ -1,4 +1,4 @@
-var url = 'http://localhost/eventos/admin/controlador/Controlador_Inscricoes.php';
+var url = 'http://localhost/eventos/lib/Controlador/Inscricoes.php';
 
 function valida(form) {
 	var ok = true;
@@ -29,7 +29,7 @@ function posta(form) {
 function lista() {
 	$.ajax({
 		type: 'GET',
-		url: url + '?acao=listar',
+		url: url + '?acao=lista',
 		dataType: 'json',
 		success: function (inscricoes) {
 			var tbody = $('#lista');
@@ -48,7 +48,7 @@ function lista() {
 }
 
 function edita(id) {
-	$.get(url + '?acao=ver&id=' + id, function (inscricao) {
+	$.get(url + '?acao=getById&id=' + id, function (inscricao) {
 		$('#id').val(inscricao.id);
 		$('#nome').val(inscricao.nome);
 		$('#usuario').val(inscricao.usuario);
@@ -56,14 +56,14 @@ function edita(id) {
 		$('#email').val(inscricao.email);
 		$('#evento').val(inscricao.evento);
 		
-		$('#acao').val('editar');
+		$('#acao').val('edita');
 	}, 'json');
 }
 
 function apaga(id) {
 	var ok = confirm('Deseja apagar #' + id + '?');
 	if (ok) {
-		$.get(url + '?acao=apagar&id=' + id, function (resposta) {
+		$.get(url + '?acao=apaga&id=' + id, function (resposta) {
 			if (resposta.ok) {
 				alert('Apagado com sucesso!');
 				lista();
@@ -76,6 +76,6 @@ function apaga(id) {
 }
 
 function novo() {
-	$('#acao').val('inserir');
+	$('#acao').val('insere');
 	$('#id').val(0);
 }

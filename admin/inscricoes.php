@@ -1,7 +1,7 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Eventos.php');
 $dao = new DAO_Eventos();
-$eventos = $dao->listar();
+$eventos = $dao->lista();
 ?>
 <html>
 <head>
@@ -13,7 +13,7 @@ $eventos = $dao->listar();
 	<?php include('menu.php'); ?>
 	<form id="form" method="post" onSubmit="valida(this); return false;">
 		<input type="reset" value="Novo" onClick="novo();" />
-		<input type="hidden" value="inserir" id="acao" name="acao" />
+		<input type="hidden" value="insere" id="acao" name="acao" />
 		<input type="hidden" value="0" name="id" id="id" />
 		<div>
 			<label for="nome">Nome</label>

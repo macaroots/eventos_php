@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-
-require_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/eventos/DAO_Inscricoes.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Inscricoes.php');
 
 $dao = new DAO_Inscricoes();
 

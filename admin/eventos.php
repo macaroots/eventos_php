@@ -7,7 +7,7 @@
 	<?php include('menu.php'); ?>
 	<form id="form" method="post" onSubmit="valida(this); return false;">
 		<input type="reset" value="Novo" onClick="novo();" />
-		<input type="hidden" value="inserir" id="acao" name="acao" />
+		<input type="hidden" value="insere" id="acao" name="acao" />
 		<input type="hidden" value="0" name="id" id="id" />
 		<div>
 			<label for="nome">Nome</label>
@@ -41,7 +41,7 @@
 		</tbody>
 	</table>
 	<script>
-	var url = 'http://localhost/eventos/admin/controlador/Controlador_Eventos.php';
+	var url = 'http://localhost/eventos/lib/Controlador/Eventos.php';
 	
 	function valida(form) {
 		var ok = true;
@@ -72,7 +72,7 @@
 	function lista() {
 		$.ajax({
 			type: 'GET',
-			url: url + '?acao=listar',
+			url: url + '?acao=lista',
 			dataType: 'json',
 			success: function (eventos) {
 				var tbody = $('#lista');
@@ -90,20 +90,20 @@
 	}
 	
 	function edita(id) {
-		$.get(url + '?acao=ver&id=' + id, function (evento) {
+		$.get(url + '?acao=getById&id=' + id, function (evento) {
 			$('#id').val(evento.id);
 			$('#nome').val(evento.nome);
 			$('#data').val(evento.data);
 			$('#descricao').val(evento.descricao);
 			
-			$('#acao').val('editar');
+			$('#acao').val('edita');
 		}, 'json');
 	}
 	
 	function apaga(id) {
 		var ok = confirm('Deseja apagar #' + id + '?');
 		if (ok) {
-			$.get(url + '?acao=apagar&id=' + id, function (resposta) {
+			$.get(url + '?acao=apaga&id=' + id, function (resposta) {
 				if (resposta.ok) {
 					alert('Apagado com sucesso!');
 					lista();
@@ -116,7 +116,7 @@
 	}
 
 	function novo() {
-		$('#acao').val('inserir');
+		$('#acao').val('insere');
 		$('#id').val(0);
 	}
 	

@@ -1,8 +1,8 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Eventos.php');
 $daoEventos = new DAO_Eventos();
-$proximosEventos = $daoEventos->listarProximos();
-$ultimosEventos = $daoEventos->listarUltimos();
+$proximosEventos = $daoEventos->listaProximos();
+$ultimosEventos = $daoEventos->listaUltimos();
 ?>
 <html>
 <head>

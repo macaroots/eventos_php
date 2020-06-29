@@ -1,12 +1,12 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Eventos.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/modelo/DAO_Submissoes.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Eventos.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Submissoes.php');
 $daoEventos = new DAO_Eventos();
 $daoSubmissoes = new DAO_Submissoes();
 
 $id = $_GET['id'];
-$evento = $daoEventos->ver($id);
-$submissoes = $daoSubmissoes->listarPorEvento($evento['id']);
+$evento = $daoEventos->getById($id);
+$submissoes = $daoSubmissoes->listaPorEvento($evento['id']);
 ?>
 <html>
 <head>
@@ -34,7 +34,7 @@ foreach ($submissoes as $submissao) {
 		<h2>Inscreva-se:</h2>
 		<form id="form" method="post" onSubmit="valida(this); return false;">
 			<input type="hidden" name="evento" id="evento" value="<?php echo $evento['id']; ?>">
-			<input type="hidden" name="acao" value="inserir" required="true" />
+			<input type="hidden" name="acao" value="insere" required="true" />
 			
 			<div>
 				<label for="nome">Nome</label>
