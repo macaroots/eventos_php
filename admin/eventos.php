@@ -2,6 +2,9 @@
 <head>
 	<meta charset="utf-8"/>
 	<script src="../_js/jquery-3.4.1.min.js"></script>
+	<script>
+	var url = 'http://localhost/eventos_php/lib/Controlador/Eventos.php';
+	</script>
 </head>
 <body>
 	<?php include('menu.php'); ?>
@@ -21,8 +24,7 @@
 		
 		<div>
 			<label for="descricao">Descrição</label>
-			<textarea name="descricao" id="descricao"  required="true">
-			</textarea>
+			<textarea name="descricao" id="descricao"  required="true"></textarea>
 		</div>
 		
 		<input type="submit"/>
@@ -41,8 +43,6 @@
 		</tbody>
 	</table>
 	<script>
-	var url = 'http://localhost/eventos/lib/Controlador/Eventos.php';
-	
 	function valida(form) {
 		var ok = true;
 		

@@ -1,8 +1,5 @@
 <?php
-if(!isset($_SESSION)) {
-	session_start();
-}
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Abstrato.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Abstrato.php');
 
 class DAO_Submissoes extends DAO_Abstrato {
 	public $tabela = 'submissoes';
@@ -23,7 +20,7 @@ class DAO_Submissoes extends DAO_Abstrato {
 			throw new Exception(join('\n', $erros));
 		}
 	}
-
+	
 	function listaPorEvento($id) {
 		return $_SESSION[$this->tabela];
 	}

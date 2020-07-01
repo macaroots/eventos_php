@@ -2,8 +2,9 @@
 if(!isset($_SESSION)) {
 	session_start();
 }
+require_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO.php');
 
-class DAO_Abstrato {
+class DAO_Abstrato implements DAO {
 	public $tabela = 'tabela';
 
 	function __construct() {		

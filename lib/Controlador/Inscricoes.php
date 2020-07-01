@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/Controlador/Controlador_Abstrato.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Inscricoes.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/Controlador/Controlador_Abstrato.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Inscricoes.php');
 
 class Controlador_Inscricoes extends Controlador_Abstrato {
 	function __construct() {

@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Eventos.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Eventos.php');
 $daoEventos = new DAO_Eventos();
 $proximosEventos = $daoEventos->listaProximos();
 $ultimosEventos = $daoEventos->listaUltimos();

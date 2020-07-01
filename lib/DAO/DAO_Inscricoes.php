@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Abstrato.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Abstrato.php');
 
 class DAO_Inscricoes extends DAO_Abstrato {
 	public $tabela = 'inscricoes';

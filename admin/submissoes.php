@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Eventos.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Inscricoes.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Eventos.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Inscricoes.php');
 
 $daoEventos = new DAO_Eventos();
 $daoInscricoes = new DAO_Inscricoes();
@@ -11,6 +11,9 @@ $inscricoes = $daoInscricoes->lista();
 <head>
 	<meta charset="utf-8"/>
 	<script src="../_js/jquery-3.4.1.min.js"></script>
+	<script>
+	var url = 'http://localhost/eventos_php/lib/Controlador/Submissoes.php';
+	</script>
 </head>
 <body>
 	<?php include('menu.php'); ?>
@@ -30,7 +33,7 @@ $inscricoes = $daoInscricoes->lista();
 		
 		<div>
 			<label for="usuarios">Usuários</label>
-			<select name="usuarios" id="usuarios" multiple="true" required="true">
+			<select name="usuarios[]" id="usuarios" multiple="true" required="true">
 <?php
 foreach ($inscricoes as $inscricao) {
 ?>
@@ -81,7 +84,6 @@ foreach ($eventos as $evento) {
 		</tbody>
 	</table>
 	<script>
-	var url = 'http://localhost/eventos/lib/Controlador/Submissoes.php';
 	function valida(form) {
 		var ok = true;
 		

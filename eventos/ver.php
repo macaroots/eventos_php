@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Eventos.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Submissoes.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Eventos.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Submissoes.php');
 $daoEventos = new DAO_Eventos();
 $daoSubmissoes = new DAO_Submissoes();
 
@@ -24,7 +24,7 @@ $submissoes = $daoSubmissoes->listaPorEvento($evento['id']);
 foreach ($submissoes as $submissao) {
 ?>
 		<div>
-			<?php echo $submissao['titulo']; ?>			(<?php echo $submissao['usuarios']; ?>) - <?php echo $submissao['tipo']; ?>
+			<?php echo $submissao['titulo']; ?>			(<?php echo join(', ', $submissao['usuarios']); ?>) - <?php echo $submissao['tipo']; ?>
 		</div>
 <?php
 }

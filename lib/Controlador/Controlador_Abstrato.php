@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/admin/checa_logado.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/admin/checa_logado.php');
 
 abstract class Controlador_Abstrato {
 	public $dao;

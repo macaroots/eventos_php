@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/Controlador/Controlador_Abstrato.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/eventos/lib/DAO/DAO_Submissoes.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/Controlador/Controlador_Abstrato.php');
+include_once($_SERVER['CONTEXT_DOCUMENT_ROOT'] . '/eventos_php/lib/DAO/DAO_Submissoes.php');
 
 class Controlador_Submissoes extends Controlador_Abstrato {
 	function __construct() {
@@ -16,6 +16,9 @@ class Controlador_Submissoes extends Controlador_Abstrato {
 			'evento' => $_POST['evento'],
 			'tipo' => $_POST['tipo']
 		];
+		if (!is_array($submissao['usuarios'])) {
+			$submissao['usuarios'] = array($submissao['usuarios']);
+		}
 		return $submissao;
 	}
 
